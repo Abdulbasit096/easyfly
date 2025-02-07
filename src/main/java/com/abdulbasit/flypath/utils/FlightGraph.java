@@ -56,9 +56,9 @@ public class FlightGraph {
     // In FlightGraph.java
     public void addFlight(Itinerary itinerary) {
         itineraries.offer(itinerary);
-        if (itineraries.size()>5){
-            itineraries.poll();
-        }
+//        if (itineraries.size()>5){
+//            itineraries.poll();
+//        }
 
 
 

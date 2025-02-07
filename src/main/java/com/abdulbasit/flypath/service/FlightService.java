@@ -166,7 +166,7 @@ public class FlightService {
                     "#request.adults() + '_' + #request.cheapest()"
     )
     public FlightGraph loadFlightData(FlightRequest request) {
-        List<Itinerary> itineraries = searchFlights(request);
+        List<Itinerary> itineraries = getAllFlights(request);
         FlightGraph flightGraph = new FlightGraph(request.cheapest());
         for (Itinerary itinerary : itineraries) {
             flightGraph.addFlight(itinerary);
