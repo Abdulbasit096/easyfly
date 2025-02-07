@@ -95,7 +95,7 @@ public class FlightService {
                             .and("departureDate", request.departureDate())
                             .and("returnDate", request.returnDate())
                             .and("adults", request.adults())
-                            .and("max", 50)
+                            .and("max", 100)
             );
 
             for (FlightOfferSearch offer : flightOffers) {
