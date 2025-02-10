@@ -3,6 +3,7 @@ package com.abdulbasit.flypath.model;
 import jdk.jfr.Enabled;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,14 @@ import java.util.List;
 
 
 
-public class RouteModel {
+public class RouteModel implements Serializable {
 
-    public static class Segment{
+    public static class Segment implements Serializable{
         String airline;
         String origin;
         String destination;
+
+        public Segment(){}
 
         public Segment(String airline, String origin, String destination) {
             this.airline = airline;
@@ -73,11 +76,14 @@ public class RouteModel {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        int hours = duration / 60;
-        int minutes = duration % 60;
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-        this.duration = String.format("%02d Hours and %02d Minutes", hours, minutes);
+    public void setDurationFromMinutes(int minutes) {
+        int hours = minutes / 60;
+        int mins = minutes % 60;
+        this.duration = String.format("%02d Hours and %02d Minutes", hours, mins);
     }
 
     public void setPrice(String price){

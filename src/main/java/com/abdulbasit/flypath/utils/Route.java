@@ -61,7 +61,7 @@ public class Route {
 
 
 
-        routeModel.setDuration(totalDuration);
+        routeModel.setDurationFromMinutes(totalDuration);
 
         return routeModel;
     }

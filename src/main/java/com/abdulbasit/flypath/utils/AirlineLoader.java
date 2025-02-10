@@ -14,15 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Service
 public class AirlineLoader {
 
     private final Map<String, Airline> airlines = new HashMap<>();
     private static final Logger logger = LoggerFactory.getLogger(AirlineLoader.class);
 
 
-    @PostConstruct
-    private void loadAirlines() {
+
+    public AirlineLoader() {
         logger.info("Loading airlines - START");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new ClassPathResource("airlines.csv").getInputStream()))) {
             String line;

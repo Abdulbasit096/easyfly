@@ -2,18 +2,20 @@ package com.abdulbasit.flypath.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Itinerary {
+public class Itinerary implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     List<RouteModel> routes;
     String price;
-    @JsonIgnore
     private int durationInt;
-    @JsonIgnore
     private int departureDurationInt;
-    @JsonIgnore
     private int returnDurationInt;
     String totalDuration;
     String departureDuration;

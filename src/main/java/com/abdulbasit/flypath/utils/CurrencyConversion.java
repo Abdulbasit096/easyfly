@@ -1,19 +1,23 @@
 package com.abdulbasit.flypath.utils;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.stereotype.Component;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
 @Component
 public class CurrencyConversion {
     private static final Dotenv dotenv = Dotenv.load();
     private static final String BASE_URL = String.format("https://v6.exchangerate-api.com/v6/%s/pair/EUR/PKR",
             dotenv.get("EXCHANGE_RATE_API_KEY"));
+    Logger logger = LoggerFactory.getLogger(CurrencyConversion.class);
 
         private record ExchangeRateResponse(String result, double conversionRate) {
 
@@ -81,7 +85,14 @@ public class CurrencyConversion {
             throw new IllegalArgumentException("Amount cannot be negative");
         }
 
-        double rate = getExchangeRate();
-        return (int) (eurAmount * rate);
+        try{
+            double rate = getExchangeRate();
+            return (int) (eurAmount * rate);
+        }catch (IOException  | InterruptedException e){
+            logger.error("Conversion Error "+e.getMessage());
+            throw e;
+
+        }
+
     }
 }

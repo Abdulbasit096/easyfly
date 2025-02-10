@@ -38,7 +38,7 @@ public class FlightGraph {
 
         }else{
             itineraries = new PriorityQueue<>((a,b)->{
-                int priceComparison = Integer.compare(Integer.parseInt(a.getPrice()),Integer.parseInt(b.getPrice()));
+                int priceComparison = Double.compare(Integer.parseInt(a.getPrice()),Integer.parseInt(b.getPrice()));
                 if (priceComparison==0){
                     int durationComparison = Integer.compare(a.getDurationInt(),b.getDurationInt());
                     if (durationComparison==0){
