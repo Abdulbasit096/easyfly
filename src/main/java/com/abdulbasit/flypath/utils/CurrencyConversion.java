@@ -4,7 +4,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -12,11 +18,17 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 
-@Component
+@Service
 public class CurrencyConversion {
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String BASE_URL = String.format("https://v6.exchangerate-api.com/v6/%s/pair/EUR/PKR",
-            dotenv.get("EXCHANGE_RATE_API_KEY"));
+
+
+    private final String BASE_URL;
+
+    public CurrencyConversion(@Value("${EXCHANGE_RATE_API_KEY}") String apikey){
+        BASE_URL=String.format("https://v6.exchangerate-api.com/v6/%s/pair/EUR/PKR",apikey);
+
+    }
+
     Logger logger = LoggerFactory.getLogger(CurrencyConversion.class);
 
         private record ExchangeRateResponse(String result, double conversionRate) {

@@ -1,5 +1,4 @@
 package com.abdulbasit.flypath.service;
-
 import com.abdulbasit.flypath.model.FlightRequest;
 import com.abdulbasit.flypath.model.Itinerary;
 import com.abdulbasit.flypath.model.RouteModel;
@@ -9,20 +8,21 @@ import com.amadeus.Params;
 import com.amadeus.exceptions.ResponseException;
 import com.amadeus.resources.FlightOfferSearch;
 import com.google.common.util.concurrent.RateLimiter;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AmadeusAPIService {
-    Dotenv dotenv;
+
+
+
     private final Amadeus amadeus;
     Logger logger = LoggerFactory.getLogger(AmadeusAPIService.class);
     private final RateLimiter rateLimiter = RateLimiter.create(2.0);
@@ -30,10 +30,13 @@ public class AmadeusAPIService {
     @Autowired
     AirlineService airlineService;
 
+    @Autowired
+    CurrencyConversion currencyConversion;
 
-    public AmadeusAPIService() {
-        dotenv = Dotenv.load();
-        this.amadeus = Amadeus.builder(dotenv.get("API_KEY"), dotenv.get("API_SECRET")).build();
+
+    public AmadeusAPIService(@Value("${API_KEY}") String apiKey,
+                             @Value("${API_SECRET}") String apiSecret) {
+        this.amadeus = Amadeus.builder(apiKey,apiSecret).build();
     }
 
     @Cacheable(
@@ -47,7 +50,7 @@ public class AmadeusAPIService {
         logger.info("Searching flights with params: origin={}, dest={}, date={}",
                 request.origin(), request.destination(), request.departureDate());
         List<Itinerary> itineraries = new ArrayList<>();
-        CurrencyConversion currencyConversion = new CurrencyConversion();
+
 
         try {
             FlightOfferSearch[] flightOffers = amadeus.shopping.flightOffersSearch.get(

@@ -1,17 +1,7 @@
 package com.abdulbasit.flypath.service;
-
-import com.abdulbasit.flypath.model.Flight;
 import com.abdulbasit.flypath.model.FlightRequest;
 import com.abdulbasit.flypath.model.Itinerary;
-import com.abdulbasit.flypath.model.RouteModel;
-import com.abdulbasit.flypath.utils.CurrencyConversion;
 import com.abdulbasit.flypath.utils.FlightGraph;
-import com.amadeus.Amadeus;
-import com.amadeus.Params;
-import com.amadeus.exceptions.ResponseException;
-import com.amadeus.resources.FlightOfferSearch;
-import io.github.cdimascio.dotenv.Dotenv;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
