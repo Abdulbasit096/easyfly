@@ -59,7 +59,7 @@ public class AmadeusAPIService {
                             .and("departureDate", request.departureDate())
                             .and("returnDate", request.returnDate())
                             .and("adults", request.adults())
-                            .and("max", 100)
+                            .and("max", 15)
             );
 
             for (FlightOfferSearch offer : flightOffers) {
