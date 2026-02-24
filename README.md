@@ -11,7 +11,6 @@
 - ⚡ **Shortest Route** — Finds the fastest (fewest stops / least duration) route between two airports
 - 💱 **Currency Conversion** — Automatically converts flight prices from EUR to PKR using an exchange rate API
 - 🗃️ **Redis Caching** — Caches flight search results to reduce redundant Amadeus API calls
-- 🌐 **CORS Support** — Pre-configured for frontend on `http://localhost:3000`
 - 📊 **Airline & Airport Data** — Bundled CSV datasets for airlines and airports
 
 ---
@@ -179,7 +178,3 @@ REDIS_PASSWORD=your_redis_password
 ```
 
 ---
-
-## 📄 License
-
-This project currently has no license specified.
